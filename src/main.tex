@@ -1,0 +1,22 @@
+% \documentclass[digital]{fithesis3}
+\documentclass{article}
+
+\usepackage{markdown}
+\def\markdownOptionOutputDir{./build}
+\begin{document}
+
+
+\begin{markdown*}{%
+  hybrid,
+  definitionLists,
+  footnotes,
+  inlineFootnotes,
+  hashEnumerators,
+  fencedCode,
+  citations,
+  citationNbsps,
+}
+\markdownInput{README.md}
+\end{markdown*}
+
+\end{document}
