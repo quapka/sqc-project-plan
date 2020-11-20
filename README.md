@@ -85,6 +85,9 @@ The separation into modules and libraries can evolve in time. However, some gene
 - considering using functional style of programming. This seems appropriate e.g. for the translation proxy between the v1 and v2 versions. Proclaimed Rust's zero-cost-abstraction should allow no increase in performance costs (this can be tested),
 - using _session types_ --- methods returning different _state_  `structs` so that logically invalid function calls and data flows won't occur,
 - usage of 3rd party libraries and code should be limited to the absolute necessity and to the cases, where it makes sense (e.g. the Noise Protocol framework). However, blind usage is discouraged and active approach towards those libraries will be taken (e.g. code review, upstream fixes, etc.).
+- Rust's compiler is quite pedantic which can lead to handling of propagating errors as crashes (even if meant as a temporary solution). However, such unhandled cases are strictly discouraged and each error should be handled with care (and the potential crash should be intentional).
+- as important a project open-source project it should be sufficiently documented. This can be enforced by the appropriate Rust macro. However, documentation requirement won't probably be strict from the beginning as it can lead to a poor documentation (to satisfy the compiler) and be a burden in the initial phases of project implementation (also the code will change much more in the beginning leading to the need of constant documentation updates),
+- versioning of the libraries will be further discussed, however, formal versions are not necessary to perform the inital phases of the implementation
 
 ### Security
 
