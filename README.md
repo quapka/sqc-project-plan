@@ -119,24 +119,29 @@ In no particular order - simply stuff that has crossed my mind and I'd like to a
 1. How to do testing in Rust?
 1. How to achieve testing as close to the real use as possible (pools, v1 only, v1/v2, v2 only devices)?
 
+Such project requires continous research in the areas of best security practices, Rust updates and features and bitcoin and possible altcoins progressions.
 
 ## Assisting in the deployment of Stratum v2
 
 Talks, tutorials, screencasts, blogs reflecting the questions and topics arising from Bitcoin community.
 
-### Improvements as described at Stratum v2 homepage
+## Improvements as described at Stratum v2 homepage
+
+Stratum v2 homepage stresses out the more important points of the new protocol framework. This sections make a few project plan related comments about them.
+
+###  Bandwidth consumption
 [Bandwidth consumption](https://braiins.com/stratum-v2#bandwidth)
-Server CPU load
-Job distribution latency
-Binary vs. non-binary
-Man-in-the-middle attack prevention
-Empty block mining elimination
-Job selection
-Header-only mining
-Multiplexing
-Implicit work subscription
-Native version rolling
-Zero-time backend switching
-Different type of jobs on the same connection
+### Server CPU load
+### Job distribution latency
+### Binary vs. non-binary
+### Man-in-the-middle attack prevention
+### Empty block mining elimination
+### Job selection
+### Header-only mining
+### Multiplexing
+### Implicit work subscription
+### Native version rolling
+### Zero-time backend switching
+### Different type of jobs on the same connection
 
 Translations v1-v2-v1
