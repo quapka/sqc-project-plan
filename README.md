@@ -45,7 +45,7 @@ The project concerns Stratum V2 sub-protocols that are critical pieces of the fu
 
 ### Code refactoring
 
-The vast majority of the code is expected to be implemented in [Rust](https://www.rust-lang.org/). This programming language is rather new and while stable it is still developing. Therefore the ability to refactor the code is anticipated --- this should be reflected e.g. by having the test suites _rich_ and _flexible_ enough to encourage refactoring. Further refactoring is motivated also by the goal of implementing a new protocol where the actual usage can lead to furter alterations and improvements of the specs.
+The vast majority of the code is expected to be implemented in [Rust](https://www.rust-lang.org/). This programming language is rather new and while stable it is still developing. Therefore the ability to refactor the code is anticipated --- this should be reflected e.g. by having the test suites _rich_ and _flexible_ enough to encourage refactoring. Further refactoring is motivated also by the goal of implementing a new protocol where the actual usage can lead to furter alterations and improvements of the specs. Also Stratum v2 specifications are still Work In Progress (WIP).
 
 Significant code refactorings are more than expected as Bitcoin (implementation-wise) and Rust are new areas for the grantee. However, Rust and its features have already been studied a lot by the grantee.
 
