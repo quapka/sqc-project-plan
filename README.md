@@ -41,7 +41,7 @@ Job Distribution being a complementary part makes it sensible to work on those t
 
 The project concerns Stratum V2 sub-protocols that are critical pieces of the future of mining pools existence. Therefore a good care and practices are needed to help deliver a good and reliable piece of software.
 
-[Git](https://git-scm.com/download/win) will be used for version control of part of the project. A specific branch and commit plan will be probably discussed (e.g. `main`, `dev` and `feat` branches).
+[Git](https://git-scm.com/download/win) will be used for version control of part of the project. A specific branch and commit plan will be probably discussed (e.g. `main`, `dev` and `feat` branches). The goal is to use simple yet effective way of collaboration to encourage collaborations while maintaining transparency, good code organisation and stability.
 
 ### Code refactoring
 
