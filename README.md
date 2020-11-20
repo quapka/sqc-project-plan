@@ -12,6 +12,12 @@ The following text goes into varying level of detail. The goal is to outline wit
 
 The overall idea is to create a well test and stable code rather than come up with a quickly stitched together spaghetti code that might get prematurely deployed by mining enthusiasts and cause issues and consequently discourage the upgrade from v1 to v2 in general. Therefore, rather a conservative approach is planned to be taken.
 
+## What has already been done
+
+Studying Rust, bitcoin and Stratum v1/v2 protocol specifications. The incomplete list is tracked on dedicated [trello board](https://trello.com/b/4UIMBDhJ/sqc-project-plan).
+
+## Improving specifications
+
 ## What to implement
 
 Stratum v2 protocol consists of multiple subprotocols.
