@@ -10,6 +10,8 @@ The [Stratum v2 protocol specifications](https://docs.google.com/document/d/1Fad
 
 The following text goes into varying level of detail. The goal is to outline with what intentions will the execution of the plan be carried out. Due to the scope and severity of this project the different sections might be subject to change(s) in the future.
 
+The overall idea is to create a well test and stable code rather than come up with a quickly stitched together spaghetti code that might get prematurely deployed by mining enthusiasts and cause issues and consequently discourage the upgrade from v1 to v2 in general. Therefore, rather a conservative approach is planned to be taken.
+
 ## What to implement
 
 Stratum v2 protocol consists of multiple subprotocols.
