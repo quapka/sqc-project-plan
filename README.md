@@ -137,7 +137,7 @@ Here you can find further comments.
 
 The specific details (where and how to report) regarding collaboration might emerge eventually (e.g. less formal issues might be accepted at the beginning, but this can change if the number of code reviews will increase). The exemplar categories (imagine issue labels) are: `security` (e.g. exploitable bugs with varying level of severity), `protocol` (e.g. bugs in the specification), `rust` (e.g. misuse/improper use of Rust language features. Understandably, there will be overlap, but the goal is to make collaboration transparent, simple and well articulated.
 
-An appropriate way for necessary communication about all the topics will be chosen (IRC channel, mailing-list,\ldots). The public issue trackers are a good place for general discussions, but a dedicated messaging app might be used for more efficient communication amongst the developers working daily on Stratum V2 protocol.
+An appropriate way for necessary communication about all the topics will be chosen (IRC channel, mailing-list,...). The public issue trackers are a good place for general discussions, but a dedicated messaging app might be used for more efficient communication amongst the developers working daily on Stratum V2 protocol.
 
 ## CI testing
 
