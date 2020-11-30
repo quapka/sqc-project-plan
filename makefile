@@ -22,6 +22,9 @@ build: clean plan
 .PHONY: clean build
 clean-all: clean
 
+spellcheck:
+	aspell -c -t README.md --conf=./.tex_conf --extra-dicts=./custom_spelling
+
 clean:
 	-rm -rf $(BUILD_DIR)
 	mkdir $(BUILD_DIR)
