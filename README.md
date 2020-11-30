@@ -23,11 +23,13 @@ Write a final [Bitcoin Improvement Proposal](https://github.com/bitcoin/bips/blo
 1. Security reviews and tests of the implementation.
 1. Actual implementations of possible real use cases.
 1. Tutorials and articles.
-1. Having a PR with at least concept ACK on Bitcoin Core. The PR implements the Stratum V2 protocol (Template Provider) in Bitcoin Core using the above (point one) rust library.
+1. Having a PR with at least concept ACK on Bitcoin Core. The PR implements the Stratum V2 protocol (Template Provider) in Bitcoin Core using the above (point one) Rust library.
 
 ## What has already been done
 
-Studying Rust, Bitcoin and Stratum V1/V2 protocol specifications. The incomplete list is tracked on dedicated [Trello board](https://trello.com/b/4UIMBDhJ/sqc-project-plan).
+Studying Rust, Bitcoin and Stratum V1/V2 protocol specifications. The incomplete list is tracked on dedicated [Trello board](https://trello.com/b/4UIMBDhJ/sqc-project-plan). Discussing Stratum V2 and the goals above with Jan Čapek and Matt Corallo.
+
+The topics discussed so far have included the usage of error strings vs. error codes, using Protocol Buffers vs. custom message structure, allowing different encryption schemes on the pool side (ChaCha, AES-GCM), adding new mining message due to troubles with V1--V2 translation proxy.
 
 ## Improving Stratum V2 specifications
 
@@ -43,7 +45,7 @@ Stratum V2 protocol consists of multiple sub-protocols.
 
 ### Mining Protocol
 
-This sub-protocol is the starting point for the project and as such will be worked on from the start. First standard channels will be implemented and then group channels (as they seem like a logical next step). Extended channels will be the last to be implemented. This scenario makes sense, but e.g. the implementation of standard channels might show the need to implement parts of the code for the other channels as well (or at least prepare the ground for them).
+This sub-protocol is the starting point for the project and as such will be worked on from the start. First standard channels will be implemented and then group channels (as they seem like a logical next step). Extended channels will be the last to be implemented. This scenario makes sense, but e.g. the implementation of standard channels might show the need to implement parts of the code for the other channels as well (or at least prepare the ground for them). The translation proxy between V1--V2 will be implemented here as well.
 
 
 ### Template Distribution Protocol
@@ -56,7 +58,7 @@ While not a necessity in Stratum V2 Job Negotiation sub-protocol supports decent
 
 ### Testing infrastructure
 
-Apart from unit-tests that are discussed later I propose to create more elaborate testing eco-system that would include the various mining components --- mining pools, mining proxies and mining devices. Those will probably be implemented as a separate Rust (library) create and allow to test and monitor Stratum V2 implementation in various setups. Example setup can be mining pool running Stratum V1, mining proxy with translation V1-V2 and several mining devices. Different tests and simulations will require different features (e.g. some might omit the TCP/IP layer since all the test devices will be implemented in software and ran on a single devices, so that the transportation layer won't be needed). The various setups provide trade-offs between speed of testing/simulations and closeness to the real-world mining scenario.
+Apart from unit-tests that are discussed later I propose to create more elaborate testing eco-system that would include the various mining components --- mining pools, mining proxies and mining devices. Those will probably be implemented as a separate Rust (library) crate and allow to test and monitor Stratum V2 implementation in various setups. Example setup can be mining pool running Stratum V1, mining proxy with translation V1--V2 and several mining devices. Different tests and simulations will require different features (e.g. some might omit the TCP/IP layer since all the test devices will be implemented in software and ran on a single device, so that the transportation layer won't be needed). The various setups provide trade-offs between speed of testing/simulations and closeness to the real-world mining scenario.
 
 ## Key aspects implementation-wise
 
@@ -68,7 +70,7 @@ The vast majority of the code is expected to be implemented in [Rust](https://ww
 
 ### Code testing
 
-The code should have _sufficient_ (more than 90+\%) test coverage. The tests should range from simple unit tests (at the level of an individual functions) and functional tests to as close to the real-case use as possible (running on actual mining devices and pool servers). Real hardware tests can come at costs and support from existing mining pools might be asked for.
+The code should have _sufficient_ (more than 90+\%) test coverage. The tests should range from simple unit tests (at the level of an individual functions) and functional tests to as close to the real-case use as possible (running on actual mining devices and pool servers).
 
 Tests on multiple levels and scenarios will be implemented. The specifications mention various setups, multiple mining devices, backends, proxies. As many as possible should be tested out of those if they are not covered by another setup. To help refactoring _implementation details independent_ tests will be attempted.
 
@@ -76,7 +78,7 @@ The project seems like a great candidate for using fuzzing techniques to test it
 
 ### Performance profiling
 
-Related to code testing is profiling and performance benchmarking of the implementation. The motivation is to actually see that Stratum V2 provides improved performance over the previous version. The details of the  granularity and focus of performance profiling are to be discussed. Overall performance gain might be the most important, but the knowledge of which Stratum V2 features do allow it is beneficial as well. Relation to code testing is due to the necessity to profile the code on a real hardware if possible. One concern with Stratum V2 is how big encryption overhead will be --- this is another area, where performance profiling can give a meaningful answer.
+Related to code testing is profiling and performance benchmarking of the implementation. The motivation is to see that Stratum V2 provides improved performance over the previous version. The details of the  granularity and focus of performance profiling are to be discussed. Overall performance gain might be the most important, but the knowledge of which Stratum V2 features do allow it is beneficial as well. Relation to code testing is due to the necessity to profile the code on a real hardware if possible. One concern with Stratum V2 is how big will be the encryption overhead.
 
 ### Code revisions
 
@@ -88,7 +90,7 @@ Since _all_ the code that will be produced as part of this project will be open-
 
 ### Rust-related
 
-The separation into creates, modules and libraries can evolve in time. However, some general goals that can already be laid out:
+The separation into crates, modules and libraries can evolve in time. However, some general goals that can already be laid out:
 
 - explicit (taken from Python experience: _explicit over implicit_) typing to avoid passing _syntactically_ correct, but _semantically_ incorrect data around. Therefore using custom types/structs for any part of the V1/V2 protocol to avoid handling values without meaning,
 - considering using the functional style of programming. This seems appropriate e.g. for the translation proxy between the V1 and V2 versions. Proclaimed Rust's zero-cost-abstraction should allow no increase in performance costs (this can be tested),
@@ -102,7 +104,7 @@ The separation into creates, modules and libraries can evolve in time. However, 
 
 Among other goals Stratum V2 aims to significantly improve the security and privacy of pool mining. Those goals should be actively tested and discussed. And not taken for granted from the specifications.
 
-Author's master's degree is in CyberSecurity therefore it's natural that I'd like to focus on not just implementing Stratum V2 reference implementation, but to focus on the security as well. As security is always a broad topic the following list is rather illustrative:
+My master's degree is in CyberSecurity therefore it's natural that I'd like to focus on not just implementing Stratum V2 reference implementation, but to focus on the security as well. As security is always a broad topic the following list is rather illustrative:
 
 - try to put the security features to the test. This can include recording the protocol messages and testing the expected entropy of the encrypted data stream. Furthermore, encrypted messages don't guarantee complete privacy (think side-channel analysis e.g. message sizes). It should be tested that the known attacks (e.g. the ones described in [Ruben Recabarren - Hardening Stratum, the Bitcoin Pool Mining Protocol](https://www.youtube.com/watch?v=sFdeeddVEpI)) are not possible.
 - use Rust features like ownership/borrowing and slicing (pointer views) to avoid unnecessary data copying (e.g. private/secret keys can reside only in one place in the memory), so the benefits are not only performance-wise (less data copying)
@@ -111,56 +113,21 @@ Author's master's degree is in CyberSecurity therefore it's natural that I'd lik
 - (testing the randomness of the random sources in the application (whether to do this in the runtime as well is up to a discussion))
 
 
-## Stratum V2 discussion, comments and review
-
-Topics discussed so far include the usage of error strings vs. error codes. Using Protocol Buffers instead of custom message structure. Allowing different encryption schemes on the pool side (ChaCha, AES-GCM), adding new mining message due to troubles with V1-V2 translation proxy.
-
-## Questions and topics
-
-In no particular order - simply stuff that has crossed my mind and I'd like to articulate it somewhere.
-
-## General
-
-1. How to do testing in Rust?
-1. How to achieve testing as close to the real use as possible (pools, V1 only, V1/V2, V2 only devices)?
-1. Use strict message structure or something like ProtoBuffers? Test, compare benchmark?
-
-Such project requires continous research in the areas of best security practices, Rust updates and features and bitcoin and possible altcoins progressions.
-
-
 ## Supporting the deployment of Stratum V2
 
-Talks, tutorials, screencasts, blogs reflecting the questions and topics arising from Bitcoin/Mining community.
+Talks, tutorials, screencasts, blogs reflecting the questions and topics arising from Bitcoin/Mining community. E.g. already expected blog posts topics are the benchmarking differences between V1 and V2, the security improvements or tutorials on the deployment of Mining Protocol.
 
 ## Improvements over V1 as described at Stratum V2 homepage
 
-Stratum V2 homepage stresses out the more important points of the new protocol framework. We list them here as they show the biggest differences/improvements of Stratum V2 over V1. The improvements those features provide should be testable. The goal would be to create a test suite using the testing eco-system to 
-
-- [Bandwidth consumption](https://braiins.com/stratum-v2#bandwidth)
-- [Server CPU load](https://braiins.com/stratum-v2#cpu)
-- [Job distribution latency](https://braiins.com/stratum-v2#job)
-- [Binary vs. non-binary](https://braiins.com/stratum-v2#binary)
-- [Man-in-the-middle attack prevention](https://braiins.com/stratum-v2#man)
-- [Empty block mining elimination](https://braiins.com/stratum-v2#empty)
-- [Job selection](https://braiins.com/stratum-v2#job-selection)
-- [Header-only mining](https://braiins.com/stratum-v2#header)
-- [Multiplexing](https://braiins.com/stratum-v2#multiplexing)
-- [Implicit work subscription](https://braiins.com/stratum-v2#implicit)
-- [Native version rolling](https://braiins.com/stratum-v2#native)
-- [Zero-time backend switching](https://braiins.com/stratum-v2#zero)
-- [Different type of jobs on the same connection](https://braiins.com/stratum-v2#different)
-
-TODO Translations V1-V2-V1
+Stratum V2 homepage stresses out the more important points of the new protocol framework. We list them here as they show the biggest differences/improvements of Stratum V2 over V1. The improvements those features provide should be testable. The goal would be to create a test/simulation suites using the testing eco-system above to test the following points: [Bandwidth consumption](https://braiins.com/stratum-v2#bandwidth), [Server CPU load](https://braiins.com/stratum-v2#cpu), [Job distribution latency](https://braiins.com/stratum-v2#job), [Binary vs. non-binary](https://braiins.com/stratum-v2#binary), [Man-in-the-middle attack prevention](https://braiins.com/stratum-v2#man), [Empty block mining elimination](https://braiins.com/stratum-v2#empty), [Job selection](https://braiins.com/stratum-v2#job-selection), [Header-only mining](https://braiins.com/stratum-v2#header), [Multiplexing](https://braiins.com/stratum-v2#multiplexing), [Implicit work subscription](https://braiins.com/stratum-v2#implicit), [Native version rolling](https://braiins.com/stratum-v2#native), [Zero-time backend switching](https://braiins.com/stratum-v2#zero), [Different type of jobs on the same connection](https://braiins.com/stratum-v2#different).
 
 # Appendix
 
-Here you can find comments on related technical issues.
+Here you can find further comments.
 
 ## Version control and contributions
 
-[Git](https://git-scm.com/download/win) will be used for version control of part of the project. A specific branch and commit plan will be probably discussed (e.g. `main`, `dev` and `feat` branches). The goal is to use simple yet effective way of collaboration to encourage collaborations while maintaining transparency, good code organization and stability. The specifics will be discussed in the future.
-
-Upstream repository location is up to a debate:
+[Git](https://git-scm.com/download/win) will be used for version control of part of the project. A specific branch and commit plan will be probably discussed (e.g. `main`, `dev` and `feat-XX` branches). The goal is to use simple yet effective way of collaboration to encourage contributions while maintaining transparency, good code organization and stability. The specifics will be discussed in the future.  Upstream repository location is up to a debate:
 
 - [Braiins open repositories](https://github.com/braiins/braiins/tree/bos-devel/open)?
 - [Bitcoin's Github](https://wwww.github.com/bitcoin)?
@@ -168,9 +135,9 @@ Upstream repository location is up to a debate:
 - [Jan's](https://www.github.com/quapka) or Filippo's Github accounts?
 - [Square's Github](https://wwww.github.com/square)?
 
-The specific details (where and how to report) regarding collaboration might emerge eventually (e.g. less formal issues might be accepted at the beginning, but this can change if the number of code reviews will increase). The exemplar categories (imagine issue labels) are: `security` (e.g. exploitable bugs with varying level of severity), `protocol` (e.g. bugs in the specification), `rust` (e.g. misuse/improper of Rust language features. Understandably, there will be overlap, but the goal is to make collaboration transparent, simple and well articulated.
+The specific details (where and how to report) regarding collaboration might emerge eventually (e.g. less formal issues might be accepted at the beginning, but this can change if the number of code reviews will increase). The exemplar categories (imagine issue labels) are: `security` (e.g. exploitable bugs with varying level of severity), `protocol` (e.g. bugs in the specification), `rust` (e.g. misuse/improper use of Rust language features. Understandably, there will be overlap, but the goal is to make collaboration transparent, simple and well articulated.
 
-An appropriate way for necessary communication about all the topics will be chosen (IRC channel, mailing-list). The public issue trackers are a good place for general discussions, but a dedicated messaging app might be used for more efficient communication amongst the developers working daily on Stratum V2 protocol.
+An appropriate way for necessary communication about all the topics will be chosen (IRC channel, mailing-list,\ldots). The public issue trackers are a good place for general discussions, but a dedicated messaging app might be used for more efficient communication amongst the developers working daily on Stratum V2 protocol.
 
 ## CI testing
 
@@ -181,3 +148,6 @@ Continuous Integration should be used and should _not depend_ on the platform us
 - [WIP] Work In Progress
 - [BIP] Bitcoin Improvement Proposal
 - [CI] Continuous Integration
+- [PR] Pull Request
+- [V1] Version 1
+- [V2] Version 2
