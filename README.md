@@ -11,12 +11,12 @@ The [Stratum V2 protocol specifications](https://docs.google.com/document/d/1Fad
 
 ## Overarching project goals
 
-Since the work on the opensource implementation of Stratum V2 might be started by two SquareCrypto grantees, those potential grantees decided to come up with overarching goals for both grants. These goals are co-authored with Filippo Merli.
+Since the work on the open-source implementation of Stratum V2 might be started by two SquareCrypto grantees, those potential grantees decided to come up with overarching goals for both grants. These goals are co-authored with Filippo Merli.
 
 ### One year goal (WIP)
 
 
-Write a final [Bitcoint Improvement Proposal](https://github.com/bitcoin/bips/blob/master/bip-0001.mediawiki#What_is_a_BIP) that defines the Stratum V2 protocol. The BIP will be supported by:
+Write a final [Bitcoin Improvement Proposal](https://github.com/bitcoin/bips/blob/master/bip-0001.mediawiki#What_is_a_BIP) that defines the Stratum V2 protocol. The BIP will be supported by:
 
 1. A well tested Rust implementation of Stratum V2 (not necessarily the "final" implementation).
 1. Benchmarks supporting the claims of Stratum V2.
@@ -27,11 +27,11 @@ Write a final [Bitcoint Improvement Proposal](https://github.com/bitcoin/bips/bl
 
 ## What has already been done
 
-Studying Rust, Bitcoin and Stratum V1/V2 protocol specifications. The incomplete list is tracked on dedicated [trello board](https://trello.com/b/4UIMBDhJ/sqc-project-plan).
+Studying Rust, Bitcoin and Stratum V1/V2 protocol specifications. The incomplete list is tracked on dedicated [Trello board](https://trello.com/b/4UIMBDhJ/sqc-project-plan).
 
 ## Improving Stratum V2 specifications
 
-The specificiations are quite detailed already, however, they are not finished. The finalization of the Stratum V2 specifications will be done in parallel with the reference implementation (during the grant-time). In order to bring more eyes to have a look on Stratum V2 specifications I will start by creating a BIP proposal (migrating the current [Google Document](https://docs.google.com/document/d/1FadCWj-57dvhxsnFM_7X806qyvhR0u3i85607bGHxvg/edit) into the mediawiki format). This step will probably be done with the assistence of the original authors (Pavel Moravec, Jan Čapek and Matt Corallo, etc.) as they are in a more suitable position to make the initial proposal.
+The specifications are quite detailed already, however, they are not finished. The finalization of the Stratum V2 specifications will be done in parallel with the reference implementation (during the grant-time). In order to bring more eyes to have a look on Stratum V2 specifications I will start by creating a BIP proposal (migrating the current [Google Document](https://docs.google.com/document/d/1FadCWj-57dvhxsnFM_7X806qyvhR0u3i85607bGHxvg/edit) into the MediaWiki format). This step will probably be done with the assistance of the original authors (Pavel Moravec, Jan Čapek and Matt Corallo, etc.) as they are in a more suitable position to make the initial proposal.
 
 The scope of the BIP might be up to a decision. The Template Distribution Protocol will be done in Bitcoin Core so maybe a dedicated BIP for this sub-protocol might be used. Either way this BIP will probably replace [BIP-0022](https://github.com/bitcoin/bips/blob/master/bip-0022.mediawiki) and [BIP-0023](https://github.com/bitcoin/bips/blob/master/bip-0023.mediawiki) that specify `getblocktemplate`.
 
@@ -43,12 +43,12 @@ Stratum V2 protocol consists of multiple sub-protocols.
 
 ### Mining Protocol
 
-This sub-protocol is the starting point for the project and as such will be worked on from the start. First standard channels will be implemented and then group channels (as they seem like a logical next step). Extended channels will be the last to be implemented. This scenario makes sense, but e.g. the implementaiton of standard channels might show the need to implement parts of the code for the other channels as well (or at least prepare the ground for them).
+This sub-protocol is the starting point for the project and as such will be worked on from the start. First standard channels will be implemented and then group channels (as they seem like a logical next step). Extended channels will be the last to be implemented. This scenario makes sense, but e.g. the implementation of standard channels might show the need to implement parts of the code for the other channels as well (or at least prepare the ground for them).
 
 
 ### Template Distribution Protocol
 
-This subprotocol implements the successor to the `getblocktemplate` functionality that is responsible for giving a next template for a future block. This subprotocol is probably the only part that needs to touch Bitcoin Core and most probably won't be implemented in Rust, but in C++.
+This sub-protocol implements the successor to the `getblocktemplate` functionality that is responsible for giving a next template for a future block. This sub-protocol is probably the only part that needs to touch Bitcoin Core and most probably won't be implemented in Rust, but in C++.
 
 ### Job Negotiation Protocol and Job Distribution Protocol
 
@@ -56,7 +56,7 @@ While not a necessity in Stratum V2 Job Negotiation sub-protocol supports decent
 
 ### Testing infrastructure
 
-Apart from unit-tests that are discussed later I propose to create more elaborate testing eco-system that would include the various mining components --- mining pools, mining proxies and mining devices. Those will probably be implemented as a separate Rust (library) create and allow to test and monitor Stratum V2 implementation in various setups. Example setup can be mining pool running Stratum V1, mining proxy with traslation V1-V2 and several mining devices. Different tests and simulations will require different features (e.g. some might omit the TCP/IP layer since all the test devices will be implemented in software and ran on a single devices, so that the transportation layer won't be needed). The various setups provide trade-offs between speed of testing/simulations and closeness to the real-world mining scenario.
+Apart from unit-tests that are discussed later I propose to create more elaborate testing eco-system that would include the various mining components --- mining pools, mining proxies and mining devices. Those will probably be implemented as a separate Rust (library) create and allow to test and monitor Stratum V2 implementation in various setups. Example setup can be mining pool running Stratum V1, mining proxy with translation V1-V2 and several mining devices. Different tests and simulations will require different features (e.g. some might omit the TCP/IP layer since all the test devices will be implemented in software and ran on a single devices, so that the transportation layer won't be needed). The various setups provide trade-offs between speed of testing/simulations and closeness to the real-world mining scenario.
 
 ## Key aspects implementation-wise
 
@@ -82,7 +82,7 @@ Related to code testing is profiling and performance benchmarking of the impleme
 
 Since _all_ the code that will be produced as part of this project will be open-sourced everyone will be invited and welcomed to review both the code and the specifications. Apart from the usual code reviews it would be beneficial to have a dedicated reviews regarding (details in the Appendix):
 
-- the security of the implemenation
+- the security of the implementation
 - Rust implementation (especially due to its evolving nature: new editions and features can emerge)
 - API and protocols implementation
 
@@ -96,13 +96,13 @@ The separation into creates, modules and libraries can evolve in time. However, 
 - usage of 3rd party libraries and code should be limited to the absolute necessity,
 - Rust's compiler is quite pedantic which can lead to handling the errors as crashes (even if meant as a temporary solution). However, such unhandled cases are strictly discouraged and each error should be handled with care (and the potential crash should be intentional),
 - as a important project open-source project it should be sufficiently documented. This can be enforced by the appropriate Rust macro. However, documentation requirement won't probably be strict from the beginning as it can lead to a poor documentation (to satisfy the compiler) and be a burden in the initial phases of project implementation (also the code will change much more in the beginning leading to the need of constant documentation updates),
-- versioning of the libraries will be further discussed, however, formal versions are not necessary to perform the inital phases of the implementation.
+- versioning of the libraries will be further discussed, however, formal versions are not necessary to perform the initial phases of the implementation.
 
 ### Security
 
 Among other goals Stratum V2 aims to significantly improve the security and privacy of pool mining. Those goals should be actively tested and discussed. And not taken for granted from the specifications.
 
-Author's master's degree is in Cybersecurity therefore it's natural that I'd like to focus on not just implementing Stratum V2 reference implementation, but to focus on the security as well. As security is always a broad topic the following list is rather illustrative:
+Author's master's degree is in CyberSecurity therefore it's natural that I'd like to focus on not just implementing Stratum V2 reference implementation, but to focus on the security as well. As security is always a broad topic the following list is rather illustrative:
 
 - try to put the security features to the test. This can include recording the protocol messages and testing the expected entropy of the encrypted data stream. Furthermore, encrypted messages don't guarantee complete privacy (think side-channel analysis e.g. message sizes). It should be tested that the known attacks (e.g. the ones described in [Ruben Recabarren - Hardening Stratum, the Bitcoin Pool Mining Protocol](https://www.youtube.com/watch?v=sFdeeddVEpI)) are not possible.
 - use Rust features like ownership/borrowing and slicing (pointer views) to avoid unnecessary data copying (e.g. private/secret keys can reside only in one place in the memory), so the benefits are not only performance-wise (less data copying)
@@ -158,7 +158,7 @@ Here you can find comments on related technical issues.
 
 ## Version control and contributions
 
-[Git](https://git-scm.com/download/win) will be used for version control of part of the project. A specific branch and commit plan will be probably discussed (e.g. `main`, `dev` and `feat` branches). The goal is to use simple yet effective way of collaboration to encourage collaborations while maintaining transparency, good code organisation and stability. The specifics will be discussed in the future.
+[Git](https://git-scm.com/download/win) will be used for version control of part of the project. A specific branch and commit plan will be probably discussed (e.g. `main`, `dev` and `feat` branches). The goal is to use simple yet effective way of collaboration to encourage collaborations while maintaining transparency, good code organization and stability. The specifics will be discussed in the future.
 
 Upstream repository location is up to a debate:
 
