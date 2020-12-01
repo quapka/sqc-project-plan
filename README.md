@@ -70,7 +70,7 @@ The vast majority of the code is expected to be implemented in [Rust](https://ww
 
 ### Code testing
 
-The code should have _sufficient_ (more than 90+\%) test coverage. The tests should range from simple unit tests (at the level of an individual functions) and functional tests to as close to the real-case use as possible (running on actual mining devices and pool servers).
+The code should have _sufficient_ (more than 90+\%) test coverage. The tests should range from simple unit tests (at the level of an individual functions) and functional/integration tests to as close to the real use case as possible (running on actual mining devices and pool servers).
 
 Tests on multiple levels and scenarios will be implemented. The specifications mention various setups, multiple mining devices, backends, proxies. As many as possible should be tested out of those if they are not covered by another setup. To help refactoring _implementation details independent_ tests will be attempted.
 
@@ -115,11 +115,11 @@ My master's degree is in CyberSecurity therefore it's natural that I'd like to f
 
 ## Supporting the deployment of Stratum V2
 
-Talks, tutorials, screencasts, blogs reflecting the questions and topics arising from Bitcoin/Mining community. E.g. already expected blog posts topics are the benchmarking differences between V1 and V2, the security improvements or tutorials on the deployment of Mining Protocol.
+Talks, tutorials, screencasts, blogs reflecting the questions and topics arising from Bitcoin/Mining community will be created. E.g. already expected blog post topics are the benchmarking differences between V1 and V2, the security improvements or tutorials on the deployment of Mining Protocol.
 
 ## Improvements over V1 as described at Stratum V2 homepage
 
-Stratum V2 homepage stresses out the more important points of the new protocol framework. We list them here as they show the biggest differences/improvements of Stratum V2 over V1. The improvements those features provide should be testable. The goal would be to create a test/simulation suites using the testing eco-system above to test the following points: [Bandwidth consumption](https://braiins.com/stratum-v2#bandwidth), [Server CPU load](https://braiins.com/stratum-v2#cpu), [Job distribution latency](https://braiins.com/stratum-v2#job), [Binary vs. non-binary](https://braiins.com/stratum-v2#binary), [Man-in-the-middle attack prevention](https://braiins.com/stratum-v2#man), [Empty block mining elimination](https://braiins.com/stratum-v2#empty), [Job selection](https://braiins.com/stratum-v2#job-selection), [Header-only mining](https://braiins.com/stratum-v2#header), [Multiplexing](https://braiins.com/stratum-v2#multiplexing), [Implicit work subscription](https://braiins.com/stratum-v2#implicit), [Native version rolling](https://braiins.com/stratum-v2#native), [Zero-time backend switching](https://braiins.com/stratum-v2#zero), [Different type of jobs on the same connection](https://braiins.com/stratum-v2#different).
+Stratum V2 homepage stresses out the more important points of the new protocol framework. We list them here as they show the biggest differences/improvements of Stratum V2 over V1. The improvements those features provide should be testable. The goal is to create a test/simulation suites using the testing eco-system above to test the following points: [Bandwidth consumption](https://braiins.com/stratum-v2#bandwidth), [Server CPU load](https://braiins.com/stratum-v2#cpu), [Job distribution latency](https://braiins.com/stratum-v2#job), [Binary vs. non-binary](https://braiins.com/stratum-v2#binary), [Man-in-the-middle attack prevention](https://braiins.com/stratum-v2#man), [Empty block mining elimination](https://braiins.com/stratum-v2#empty), [Job selection](https://braiins.com/stratum-v2#job-selection), [Header-only mining](https://braiins.com/stratum-v2#header), [Multiplexing](https://braiins.com/stratum-v2#multiplexing), [Implicit work subscription](https://braiins.com/stratum-v2#implicit), [Native version rolling](https://braiins.com/stratum-v2#native), [Zero-time backend switching](https://braiins.com/stratum-v2#zero), [Different type of jobs on the same connection](https://braiins.com/stratum-v2#different).
 
 # Appendix
 
